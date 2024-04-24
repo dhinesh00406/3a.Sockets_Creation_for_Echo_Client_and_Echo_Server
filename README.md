@@ -1,15 +1,58 @@
+# Develop By : DHINESH.P
+# Reg No : 212222043001
 # 3a.CREATION FOR ECHO CLIENT AND ECHO SERVER USING TCP SOCKETS
-# AIM
+# AIM:
 To write a python program for creating Echo Client and Echo Server using TCP
 Sockets Links.
-## ALGORITHM:
+# ALGORITHM:
 1. Import the necessary modules in python
 2. Create a socket connection to using the socket module.
 3. Send message to the client and receive the message from the client using the Socket module in
  server .
 4. Send and receive the message using the send function in socket.
-## PROGRAM
-## OUPUT
+# PROGRAM:
+## Client:
+```
+import socket
+
+HOST = '127.0.0.1'  
+PORT = 65432        
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    while True:
+        message = input("Enter message to send to server: ")
+        s.sendall(message.encode())
+        data = s.recv(1024)
+        print('Received', repr(data.decode()))
+```
+## SERVER:
+```
+import socket
+
+HOST = '127.0.0.1'  
+PORT = 65432       
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, addr = s.accept()
+    with conn:
+        print('Connected by', addr)
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            conn.sendall(data)
+```
+# OUPUT:
+## Client:
+![cn pic10](https://github.com/dhinesh00406/3a.Sockets_Creation_for_Echo_Client_and_Echo_Server/assets/147149471/df4dc3b3-b3a1-40cc-bf0e-c449cbcf897b)
+
+
+## Server:
+![cn pic11](https://github.com/dhinesh00406/3a.Sockets_Creation_for_Echo_Client_and_Echo_Server/assets/147149471/f0c52fae-7646-4d01-97a1-b5d945d58743)
+
 ## RESULT
 Thus, the python program for creating Echo Client and Echo Server using TCP Sockets Links 
 was successfully created and executed.
